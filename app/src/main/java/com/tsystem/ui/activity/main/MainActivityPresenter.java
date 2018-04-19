@@ -1,5 +1,7 @@
 package com.tsystem.ui.activity.main;
 
+import android.util.Log;
+
 import com.tsystem.data.ApiCalls;
 import com.tsystem.data.pojo.ApiData;
 import com.tsystem.ui.activity.main.MainActivity;
@@ -53,9 +55,13 @@ public class MainActivityPresenter implements MainActivityPresenterContract {
                     @Override
                     public void onError(Throwable e) {
                         if (view != null) {
+                            Log.v("throwable", String.valueOf(e.getLocalizedMessage()));
                             view.hideLoader();
                             // view.showError();
-                            view.dataFetched(true, null);
+                            if (e.getMessage().contains("Unable to resolve host"))
+                                view.dataFetched(false, null);
+                            else
+                                view.dataFetched(true, null);
                         }
                     }
 

@@ -7,5 +7,6 @@
     <string name="cancel">Cancel</string>
     <string name="allow_external_storage">You need to allow access to External Storage</string>
     <string name="no_data">No data Found to Load</string>
+    <string name="oops">Oops, Something went wrong</string>
 
 </resources>

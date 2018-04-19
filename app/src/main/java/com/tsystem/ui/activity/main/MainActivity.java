@@ -1,10 +1,13 @@
 package com.tsystem.ui.activity.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -19,6 +22,7 @@ import com.tsystem.R;
 import com.tsystem.data.pojo.ApiData;
 import com.tsystem.data.pojo.Results;
 import com.tsystem.databinding.ActivityMainBinding;
+import com.tsystem.ui.activity.fullscreen.FullActivity;
 import com.tsystem.ui.base.BaseActivity;
 
 import java.io.File;
@@ -88,7 +92,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract, 
                 dataList.addAll(Arrays.asList(data.getResults()));
                 adapter.notifyDataSetChanged();
             }
-        } else {
+        } else if(data == null && !isErrorFound){
 
             File directory = new File(getCacheDirectory());
             if (directory.exists()) {
@@ -101,6 +105,10 @@ public class MainActivity extends BaseActivity implements MainActivityContract, 
                 binding.textview.setVisibility(View.VISIBLE);
             }
 
+        }
+        else
+        {
+            Toast.makeText(this,R.string.oops,Toast.LENGTH_SHORT).show();
         }
         Log.v("data", String.valueOf(data));
     }
@@ -154,8 +162,6 @@ public class MainActivity extends BaseActivity implements MainActivityContract, 
 
     @Override
     public void onClick(View v) {
-        v.get
-
     }
 
     @Override
@@ -242,9 +248,8 @@ public class MainActivity extends BaseActivity implements MainActivityContract, 
         });
     }
 
-    public void closeSoftKeyBoard()
-    {
-        InputMethodManager in = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+    public void closeSoftKeyBoard() {
+        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         if (in != null) {
             in.hideSoftInputFromWindow(binding.searchEditText.getWindowToken(), 0);
         }

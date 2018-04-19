@@ -1,10 +1,13 @@
 package com.tsystem.ui.activity.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +22,7 @@ import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.signature.ObjectKey;
 import com.tsystem.R;
 import com.tsystem.data.pojo.Results;
+import com.tsystem.ui.activity.fullscreen.FullActivity;
 import com.tsystem.utils.GlideApp;
 import com.tsystem.utils.Utility;
 
@@ -121,6 +125,30 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.viewHolder> {
                     .into(holder.images);
         }
 
+
+        holder.images.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, FullActivity.class);
+                if (netAccess) {
+                    intent.putExtra("IMAGE_URL", apiData.get(position).getUrls().getRegular());
+                    intent.putExtra("NET_ACCESS",true);
+                } else {
+                    intent.putExtra("IMAGE_URL", cacheFileList.get(position).getPath());
+                    intent.putExtra("NET_ACCESS",false);
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    holder.images.setTransitionName("SELECTED_IMAGE");
+                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                            makeSceneTransitionAnimation((MainActivity) context, holder.images, "SELECTED_IMAGE");
+
+                    context.startActivity(intent, options.toBundle());
+                } else {
+                    // code for pre lollpop devices
+                    context.startActivity(intent);
+                }
+            }
+        });
 
     }
 
