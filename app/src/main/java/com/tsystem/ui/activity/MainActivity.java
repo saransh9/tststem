@@ -2,6 +2,7 @@ package com.tsystem.ui.activity;
 
 import android.databinding.DataBindingUtil;
 import android.os.BadParcelableException;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,8 +14,12 @@ import android.widget.Toast;
 
 import com.tsystem.R;
 import com.tsystem.data.pojo.ApiData;
+import com.tsystem.data.pojo.Results;
 import com.tsystem.databinding.ActivityMainBinding;
 import com.tsystem.ui.base.BaseActivity;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.inject.Inject;
 
@@ -25,6 +30,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract, 
     ActivityMainBinding binding;
     public static int PAGE_NUMBER = 1;
     String keyword;
+    ArrayList<Results> dataList=new ArrayList<>();
 
     MainAdapter adapter;
 
@@ -56,9 +62,17 @@ public class MainActivity extends BaseActivity implements MainActivityContract, 
     @Override
     public void dataFetched(Boolean isErrorFound, ApiData data) {
         if (data != null && !isErrorFound) {
-            binding.recycler.setLayoutManager(new GridLayoutManager(this, 2));
-            adapter = new MainAdapter(data, this, this);
-            binding.recycler.setAdapter(adapter);
+            if(PAGE_NUMBER==1) {
+                dataList.addAll(Arrays.asList(data.getResults()));
+                binding.recycler.setLayoutManager(new GridLayoutManager(this, 2));
+                adapter = new MainAdapter(dataList, this, this, 2);
+                binding.recycler.setAdapter(adapter);
+            }
+            else
+            {
+                dataList.addAll(Arrays.asList(data.getResults()));
+                adapter.notifyDataSetChanged();
+            }
         }
         Log.v("data", String.valueOf(data));
     }
@@ -84,12 +98,21 @@ public class MainActivity extends BaseActivity implements MainActivityContract, 
                 break;
 
             case R.id.two:
+                binding.recycler.setLayoutManager(new GridLayoutManager(this, 2));
+                adapter.setNumber_columns(2);
+                adapter.notifyDataSetChanged();
                 break;
 
             case R.id.three:
+                binding.recycler.setLayoutManager(new GridLayoutManager(this, 3));
+                adapter.setNumber_columns(3);
+                adapter.notifyDataSetChanged();
                 break;
 
             case R.id.four:
+                binding.recycler.setLayoutManager(new GridLayoutManager(this, 4));
+                adapter.setNumber_columns(4);
+                adapter.notifyDataSetChanged();
                 break;
 
             default:

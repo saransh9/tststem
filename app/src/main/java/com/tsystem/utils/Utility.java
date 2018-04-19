@@ -11,7 +11,7 @@ import android.view.WindowManager;
  */
 
 public class Utility {
-    public static int getScreenWidth(Context context) {
+    public static int getScreenWidth(Context context,int number) {
 
         //gets height and width but returns only width for use in aspect ratio
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -21,6 +21,6 @@ public class Utility {
         int width = size.x;
         int height = size.y;
         Log.v("screen with utility", String.valueOf(width));
-        return width;
+        return width/number;
     }
 }

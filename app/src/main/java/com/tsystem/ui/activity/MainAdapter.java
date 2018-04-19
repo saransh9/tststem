@@ -18,9 +18,12 @@ import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.signature.ObjectKey;
 import com.tsystem.R;
 import com.tsystem.data.pojo.ApiData;
+import com.tsystem.data.pojo.Results;
 import com.tsystem.utils.GlideApp;
 import com.tsystem.utils.RatioImageView;
 import com.tsystem.utils.Utility;
+
+import java.util.ArrayList;
 
 /**
  * Created by saransh on 23/03/18.
@@ -28,16 +31,22 @@ import com.tsystem.utils.Utility;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.viewHolder> {
 
-    ApiData apiData;
+    ArrayList<Results> apiData;
     private Context context;
     private AdapterListener mListener;
+    int number_columns;
 
 
-    public MainAdapter(ApiData apiData, Context context, final AdapterListener listener) {
+    public MainAdapter(ArrayList<Results> apiData, Context context, final AdapterListener listener, int number_columns) {
 
         this.apiData = apiData;
         this.context = context;
         this.mListener = listener;
+        this.number_columns = number_columns;
+    }
+
+    public void setNumber_columns(int number) {
+        this.number_columns = number;
     }
 
     @NonNull
@@ -53,20 +62,20 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.viewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull final viewHolder holder, int position) {
-        int width_new = Utility.getScreenWidth(context);
-        int width = Integer.parseInt(apiData.getResults()[position].getWidth());
-        int height = Integer.parseInt(apiData.getResults()[position].getHeight());
+        int width_new = Utility.getScreenWidth(context, number_columns);
+        int width = Integer.parseInt(apiData.get(position).getWidth());
+        int height = Integer.parseInt(apiData.get(position).getHeight());
         int height_new = (int) (((double) height / (double) width) * (double) width_new);
 
-        if (position == apiData.getResults().length - 2)
+        if (position == apiData.size() - 2)
             mListener.loadMoreData();           //loads more data from api
 
-       // holder.images.setImageResource(R.drawable.boax);
+        // holder.images.setImageResource(R.drawable.boax);
         GlideApp.with(context)
-                .load(apiData.getResults()[position].getUrls().getRegular())
+                .load(apiData.get(position).getUrls().getRegular())
                 .centerCrop()
                 .override(width_new, height_new)
-                .signature(new ObjectKey(apiData.getResults()[position].getUrls().getRegular()))
+                .signature(new ObjectKey(apiData.get(position).getUrls().getRegular()))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .listener(new RequestListener<Drawable>() {
                     @Override
@@ -87,7 +96,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.viewHolder> {
 
     @Override
     public int getItemCount() {
-        return apiData.getResults().length;
+        return apiData.size();
     }
 
     class viewHolder extends RecyclerView.ViewHolder {
