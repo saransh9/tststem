@@ -2,7 +2,8 @@ package com.tsystem.di.component;
 
 import android.content.Context;
 
-import com.tsystem.ui.activity.MainActivity;
+import com.tsystem.ui.activity.fullscreen.FullActivity;
+import com.tsystem.ui.activity.main.MainActivity;
 import com.tsystem.di.module.ActivityModule;
 import com.tsystem.di.scope.ActivityContext;
 import com.tsystem.di.scope.PerActivity;
@@ -21,4 +22,6 @@ public interface ActivityComponent {
     Context getContext();
 
     void inject(MainActivity activity);
+
+    void inject(FullActivity activity);
 }

@@ -1,12 +1,9 @@
-package com.tsystem.ui.activity;
+package com.tsystem.ui.activity.main;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.os.Environment;
-import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.util.Log;
@@ -14,7 +11,6 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +23,6 @@ import com.tsystem.ui.base.BaseActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
@@ -159,6 +154,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract, 
 
     @Override
     public void onClick(View v) {
+        v.get
 
     }
 

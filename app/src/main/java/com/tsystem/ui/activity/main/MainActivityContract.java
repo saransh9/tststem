@@ -1,4 +1,4 @@
-package com.tsystem.ui.activity;
+package com.tsystem.ui.activity.main;
 
 import com.tsystem.data.pojo.ApiData;
 

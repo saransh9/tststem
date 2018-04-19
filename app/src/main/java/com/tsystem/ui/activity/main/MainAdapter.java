@@ -1,4 +1,4 @@
-package com.tsystem.ui.activity;
+package com.tsystem.ui.activity.main;
 
 import android.content.Context;
 import android.graphics.Bitmap;

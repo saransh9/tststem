@@ -1,7 +1,9 @@
-package com.tsystem.ui.activity;
+package com.tsystem.ui.activity.main;
 
 import com.tsystem.data.ApiCalls;
 import com.tsystem.data.pojo.ApiData;
+import com.tsystem.ui.activity.main.MainActivity;
+import com.tsystem.ui.activity.main.MainActivityPresenterContract;
 
 import javax.inject.Inject;
 
@@ -10,7 +12,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.tsystem.ui.activity.MainActivity.PAGE_NUMBER;
+import static com.tsystem.ui.activity.main.MainActivity.PAGE_NUMBER;
 
 public class MainActivityPresenter implements MainActivityPresenterContract {
 
