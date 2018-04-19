@@ -3,5 +3,9 @@
     <string name="search">Search</string>
     <string name="search_something_to_load_images">Search something to Load Images</string>
     <string name="add_some_text">Add some text to Continue</string>
+    <string name="ok">Done</string>
+    <string name="cancel">Cancel</string>
+    <string name="allow_external_storage">You need to allow access to External Storage</string>
+    <string name="no_data">No data Found to Load</string>
 
 </resources>

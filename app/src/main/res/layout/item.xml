@@ -3,6 +3,7 @@
 <ImageView android:id="@+id/list_image"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/boax"
+    app:srcCompat="@drawable/ic_loading"
     android:scaleType="centerCrop"
-    xmlns:android="http://schemas.android.com/apk/res/android" />
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" />
